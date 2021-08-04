@@ -13,7 +13,7 @@
             Pecas = new Peca[linhas, colunas];
         }
 
-        public Peca Peca(int linhas, int colunas)
+        public Peca Peca(int linhas, int colunas) //permite acessar uma peça da matriz
         {
             return Pecas[linhas, colunas];
         }
