@@ -25,7 +25,7 @@ namespace tabuleiro
             return Pecas[pos.Linha, pos.Coluna];
         }
 
-        public bool ExistePeca(Posicao pos)
+        public bool ExistePeca(Posicao pos) //verifica se ja existe uma peça na posição passada como parametro
         {
             ValidarPosicao(pos);
             return Peca(pos) != null;

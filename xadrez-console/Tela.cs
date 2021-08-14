@@ -9,19 +9,37 @@ namespace xadrez_console
         {
             for (int i = 0; i < tab.Linhas; i++) //percorre as linhas do tabuleiro
             {
+                Console.Write($"{8 - i} ");
+
                 for (int j = 0; j < tab.Colunas; j++) //percorre as colunas do tabuleiro
                 {
-                    if (tab.Peca(i, j) == null) //verifica se existe uma peça na posição i, j
+                    if (tab.Peca(i, j) == null) //verifica se existe uma peça na posição i, j da matriz de peças
                     {
                         Console.Write("- ");
                     }
                     else
                     {
-                        Console.Write($"{tab.Peca(i, j)} ");
+                        ColocarPeca(tab.Peca(i, j));
                     }
                 }
 
                 Console.WriteLine();
+            }
+
+            Console.WriteLine("  a b c d e f g h");
+        }
+
+        public static void ColocarPeca(Peca peca)
+        {
+            if (peca.Cor == Cor.Branca)
+            {
+                Console.Write($"{peca} ");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write($"{peca} ");
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
     }
