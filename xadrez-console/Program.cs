@@ -11,13 +11,20 @@ namespace xadrez_console
         {
             try
             {
-                Tabuleiro tab = new(8, 8);
+                PartidaXadrez p = new();
 
-                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
+                while (!p.PartidaTerminada)
+                {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(p.Tab);
 
-                tab.ColocarPeca(new Rei(tab, Cor.Branca), new Posicao(6, 4));
+                    Console.Write(Environment.NewLine + "Origem: ");
+                    Posicao origem = Tela.LerPosicaoXadrez().toPosicao();
+                    Console.Write(Environment.NewLine + "Destino: ");
+                    Posicao destino = Tela.LerPosicaoXadrez().toPosicao();
 
-                Tela.ImprimirTabuleiro(tab);
+                    p.ExecutarMovimento(origem, destino);
+                }
 
                 Console.ReadLine();
             }
