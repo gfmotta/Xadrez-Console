@@ -9,7 +9,7 @@ namespace xadrez
         private int Turno;
         private Cor JogadorAtual;
         public bool PartidaTerminada { get; private set; }
-        
+
         public PartidaXadrez()
         {
             Tab = new Tabuleiro(8, 8);
@@ -23,6 +23,8 @@ namespace xadrez
         {
             Tab.ColocarPeca(new Torre(Tab, Cor.Branca), new PosicaoXadrez('c', 1).toPosicao());
             Tab.ColocarPeca(new Torre(Tab, Cor.Preta), new PosicaoXadrez('c', 8).toPosicao());
+            Tab.ColocarPeca(new Rei(Tab, Cor.Preta), new PosicaoXadrez('e', 4).toPosicao());
+            Tab.ColocarPeca(new Rei(Tab, Cor.Branca), new PosicaoXadrez('d', 1).toPosicao());
         }
 
         public void ExecutarMovimento(Posicao origem, Posicao destino)

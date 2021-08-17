@@ -14,14 +14,30 @@ namespace xadrez_console
 
                 for (int j = 0; j < tab.Colunas; j++) //percorre as colunas do tabuleiro
                 {
-                    if (tab.Peca(i, j) == null) //verifica se existe uma peça na posição i, j da matriz de peças
+                    ColocarPeca(tab.Peca(i, j));
+                }
+
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("  a b c d e f g h");
+        }
+
+        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] movimentosPossiveis) //metodo para imprimir um tabuleiro na tela
+        {
+            for (int i = 0; i < tab.Linhas; i++) //percorre as linhas do tabuleiro
+            {
+                Console.Write($"{8 - i} ");
+
+                for (int j = 0; j < tab.Colunas; j++) //percorre as colunas do tabuleiro
+                {
+                    if (movimentosPossiveis[i, j])
                     {
-                        Console.Write("- ");
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
                     }
-                    else
-                    {
-                        ColocarPeca(tab.Peca(i, j));
-                    }
+
+                    ColocarPeca(tab.Peca(i, j));
+                    Console.BackgroundColor = ConsoleColor.Black;
                 }
 
                 Console.WriteLine();
@@ -40,15 +56,22 @@ namespace xadrez_console
 
         public static void ColocarPeca(Peca peca)
         {
-            if (peca.Cor == Cor.Branca)
+            if (peca == null)
             {
-                Console.Write($"{peca} ");
+                Console.Write("- ");
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.Write($"{peca} ");
-                Console.ForegroundColor = ConsoleColor.White;
+                if (peca.Cor == Cor.Branca)
+                {
+                    Console.Write($"{peca} ");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write($"{peca} ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
             }
         }
     }
