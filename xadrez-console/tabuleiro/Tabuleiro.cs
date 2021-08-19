@@ -42,7 +42,7 @@ namespace tabuleiro
             p.Posicao = pos;
         }
 
-        public Peca RetirarPeca(Posicao pos) //retirar peça do tabuleiro
+        public Peca RetirarPeca(Posicao pos) //metodo para retirar peça do tabuleiro
         {
             if (Peca(pos) == null)
             {

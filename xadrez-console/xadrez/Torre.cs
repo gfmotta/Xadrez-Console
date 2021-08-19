@@ -30,7 +30,7 @@ namespace xadrez
                     break;
                 }
 
-                pos.Linha -= 1;
+                pos.Linha--;
             }
 
             //Verifica se a posição leste é valida
@@ -44,7 +44,7 @@ namespace xadrez
                     break;
                 }
 
-                pos.Coluna += 1;
+                pos.Coluna++;
             }
 
             //Verifica se a posição sul é valida
@@ -58,7 +58,7 @@ namespace xadrez
                     break;
                 }
 
-                pos.Linha += 1;
+                pos.Linha++;
             }
 
             //Verifica se a posição oeste é valida
@@ -72,7 +72,7 @@ namespace xadrez
                     break;
                 }
 
-                pos.Coluna -= 1;
+                pos.Coluna--;
             }
 
             return matriz;

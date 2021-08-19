@@ -8,11 +8,11 @@ namespace xadrez_console
     {
         public static void ImprimirTabuleiro(Tabuleiro tab) //metodo para imprimir um tabuleiro na tela
         {
-            for (int i = 0; i < tab.Linhas; i++) //percorre as linhas do tabuleiro
+            for (int i = 0; i < tab.Linhas; i++) 
             {
                 Console.Write($"{8 - i} ");
 
-                for (int j = 0; j < tab.Colunas; j++) //percorre as colunas do tabuleiro
+                for (int j = 0; j < tab.Colunas; j++) 
                 {
                     ColocarPeca(tab.Peca(i, j));
                 }
@@ -23,13 +23,13 @@ namespace xadrez_console
             Console.WriteLine("  a b c d e f g h");
         }
 
-        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] movimentosPossiveis) //metodo para imprimir um tabuleiro na tela
+        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] movimentosPossiveis) //metodo para imprimir um tabuleiro na tela com os possiveis movimentos da peça selecionada
         {
-            for (int i = 0; i < tab.Linhas; i++) //percorre as linhas do tabuleiro
+            for (int i = 0; i < tab.Linhas; i++) 
             {
                 Console.Write($"{8 - i} ");
 
-                for (int j = 0; j < tab.Colunas; j++) //percorre as colunas do tabuleiro
+                for (int j = 0; j < tab.Colunas; j++)
                 {
                     if (movimentosPossiveis[i, j])
                     {
