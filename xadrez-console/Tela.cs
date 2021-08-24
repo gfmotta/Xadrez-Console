@@ -1,12 +1,45 @@
 ﻿using System;
 using tabuleiro;
 using xadrez;
+using System.Collections.Generic;
 
 namespace xadrez_console
 {
     class Tela
     {
-        public static void ImprimirTabuleiro(Tabuleiro tab) //metodo para imprimir um tabuleiro na tela
+        public static void ImprimirPartida(PartidaXadrez partida)
+        {
+            ImprimirTabuleiro(partida.Tab);
+
+            ImprimirPecasCapturadas(partida);
+
+            Console.WriteLine(Environment.NewLine + $"Turno: {partida.Turno}");
+            Console.WriteLine($"Jogador atual: {partida.JogadorAtual}");
+            Console.WriteLine("Aguardando jogada...");
+        }
+
+        public static void ImprimirPecasCapturadas(PartidaXadrez partida)
+        {
+            Console.WriteLine(Environment.NewLine + "Peças capturadas: ");
+            Console.Write("Brancas: ");
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
+            Console.Write("Pretas: ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
+            Console.Write("(");
+            foreach(Peca p in conjunto)
+            {
+                Console.Write($"{p} ");
+            }
+            Console.WriteLine(")");
+        }
+
+        public static void ImprimirTabuleiro(Tabuleiro tab) //imprime um tabuleiro na tela
         {
             for (int i = 0; i < tab.Linhas; i++) 
             {
@@ -23,7 +56,7 @@ namespace xadrez_console
             Console.WriteLine("  a b c d e f g h");
         }
 
-        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] movimentosPossiveis) //metodo para imprimir um tabuleiro na tela com os possiveis movimentos da peça selecionada
+        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] movimentosPossiveis) //imprime um tabuleiro na tela com os possiveis movimentos de uma peça selecionada pelo jogador
         {
             for (int i = 0; i < tab.Linhas; i++) 
             {
