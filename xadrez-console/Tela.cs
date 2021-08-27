@@ -16,6 +16,11 @@ namespace xadrez_console
             Console.WriteLine(Environment.NewLine + $"Turno: {partida.Turno}");
             Console.WriteLine($"Jogador atual: {partida.JogadorAtual}");
             Console.WriteLine("Aguardando jogada...");
+
+            if (partida.Xeque)
+            {
+                Console.WriteLine("XEQUE!");
+            }
         }
 
         public static void ImprimirPecasCapturadas(PartidaXadrez partida)
@@ -32,7 +37,7 @@ namespace xadrez_console
         public static void ImprimirConjunto(HashSet<Peca> conjunto)
         {
             Console.Write("(");
-            foreach(Peca p in conjunto)
+            foreach (Peca p in conjunto)
             {
                 Console.Write($"{p} ");
             }
@@ -41,11 +46,11 @@ namespace xadrez_console
 
         public static void ImprimirTabuleiro(Tabuleiro tab) //imprime um tabuleiro na tela
         {
-            for (int i = 0; i < tab.Linhas; i++) 
+            for (int i = 0; i < tab.Linhas; i++)
             {
                 Console.Write($"{8 - i} ");
 
-                for (int j = 0; j < tab.Colunas; j++) 
+                for (int j = 0; j < tab.Colunas; j++)
                 {
                     ColocarPeca(tab.Peca(i, j));
                 }
@@ -58,7 +63,7 @@ namespace xadrez_console
 
         public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] movimentosPossiveis) //imprime um tabuleiro na tela com os possiveis movimentos de uma peça selecionada pelo jogador
         {
-            for (int i = 0; i < tab.Linhas; i++) 
+            for (int i = 0; i < tab.Linhas; i++)
             {
                 Console.Write($"{8 - i} ");
 
