@@ -15,12 +15,12 @@ namespace tabuleiro
             Pecas = new Peca[linhas, colunas];
         }
 
-        public Peca Peca(int linha, int coluna) //permite acessar uma peça da matriz
+        public Peca Peca(int linha, int coluna) //permite acessar uma peça da matriz de peças
         {
             return Pecas[linha, coluna];
         }
 
-        public Peca Peca(Posicao pos) //permite acessar uma peça da matriz
+        public Peca Peca(Posicao pos) //permite acessar uma peça da matriz de peças
         {
             return Pecas[pos.Linha, pos.Coluna];
         }
@@ -63,7 +63,7 @@ namespace tabuleiro
             }
         }
 
-        public bool PosicaoValida(Posicao pos)
+        public bool PosicaoValida(Posicao pos) //metodo que verifica se a posiçao passada como parametro esta dento do tabuleiro 
         {
             if (pos.Linha < 0 || pos.Linha >= Linhas || pos.Coluna < 0 || pos.Coluna >= Colunas)
             {
