@@ -2,9 +2,9 @@
 
 namespace xadrez
 {
-    class Rei : Peca
+    class Cavalo : Peca
     {
-        public Rei(Tabuleiro tab, Cor cor) : base(tab, cor)
+        public Cavalo(Tabuleiro tab, Cor cor) : base(tab, cor)
         {
         }
 
@@ -19,57 +19,49 @@ namespace xadrez
 
             Posicao pos = new(0, 0);
 
-            //Norte
-            pos.DefinirPosicao(Posicao.Linha - 1, Posicao.Coluna);
+            pos.DefinirPosicao(Posicao.Linha - 1, Posicao.Coluna - 2);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
             }
 
-            //Sul
-            pos.DefinirPosicao(Posicao.Linha + 1, Posicao.Coluna);
+            pos.DefinirPosicao(Posicao.Linha - 2, Posicao.Coluna - 1);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
             }
 
-            //Leste
-            pos.DefinirPosicao(Posicao.Linha, Posicao.Coluna + 1);
+            pos.DefinirPosicao(Posicao.Linha - 2, Posicao.Coluna + 1);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
             }
 
-            //Oeste
-            pos.DefinirPosicao(Posicao.Linha, Posicao.Coluna - 1);
+            pos.DefinirPosicao(Posicao.Linha - 1, Posicao.Coluna + 2);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
             }
 
-            //Nordeste
-            pos.DefinirPosicao(Posicao.Linha - 1, Posicao.Coluna + 1);
+            pos.DefinirPosicao(Posicao.Linha + 1, Posicao.Coluna + 2);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
             }
 
-            //Sudeste
-            pos.DefinirPosicao(Posicao.Linha + 1, Posicao.Coluna + 1);
+            pos.DefinirPosicao(Posicao.Linha + 2, Posicao.Coluna + 1);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
             }
 
-            //Noroeste
-            pos.DefinirPosicao(Posicao.Linha - 1, Posicao.Coluna - 1);
+            pos.DefinirPosicao(Posicao.Linha + 2, Posicao.Coluna - 1);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
             }
 
-            //Sudoeste
-            pos.DefinirPosicao(Posicao.Linha + 1, Posicao.Coluna - 1);
+            pos.DefinirPosicao(Posicao.Linha + 1, Posicao.Coluna - 2);
             if (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
@@ -80,7 +72,7 @@ namespace xadrez
 
         public override string ToString()
         {
-            return "R";
+            return "C";
         }
     }
 }

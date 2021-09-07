@@ -2,15 +2,16 @@
 
 namespace xadrez
 {
-    class Torre : Peca
+    class Bispo : Peca
     {
-        public Torre(Tabuleiro tab, Cor cor) : base(tab, cor)
+        public Bispo(Tabuleiro tab, Cor cor) : base(tab, cor)
         {
         }
 
-        private bool PodeMover(Posicao pos) //Verifica se a peça pode se mover para tal posição
+        private bool PodeMover(Posicao pos)
         {
-            return Tab.Peca(pos) == null || Tab.Peca(pos).Cor != Cor;
+            Peca p = Tab.Peca(pos);
+            return p == null || p.Cor != Cor;
         }
 
         public override bool[,] MovimentosPossiveis()
@@ -19,8 +20,8 @@ namespace xadrez
 
             Posicao pos = new(0, 0);
 
-            //Norte
-            pos.DefinirPosicao(Posicao.Linha - 1, Posicao.Coluna);
+            //Nordeste
+            pos.DefinirPosicao(Posicao.Linha - 1, Posicao.Coluna + 1);
             while (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
@@ -30,11 +31,11 @@ namespace xadrez
                     break;
                 }
 
-                pos.Linha--;
+                pos.DefinirPosicao(pos.Linha - 1, pos.Coluna + 1);
             }
 
-            //Sul
-            pos.DefinirPosicao(Posicao.Linha + 1, Posicao.Coluna);
+            //Sudeste
+            pos.DefinirPosicao(Posicao.Linha + 1, Posicao.Coluna + 1);
             while (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
@@ -44,11 +45,11 @@ namespace xadrez
                     break;
                 }
 
-                pos.Linha++;
+                pos.DefinirPosicao(pos.Linha + 1, pos.Coluna + 1);
             }
 
-            //Leste
-            pos.DefinirPosicao(Posicao.Linha, Posicao.Coluna + 1);
+            //Noroeste
+            pos.DefinirPosicao(Posicao.Linha - 1, Posicao.Coluna - 1);
             while (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
@@ -58,11 +59,11 @@ namespace xadrez
                     break;
                 }
 
-                pos.Coluna++;
+                pos.DefinirPosicao(pos.Linha - 1, pos.Coluna - 1);
             }
 
-            //Oeste
-            pos.DefinirPosicao(Posicao.Linha, Posicao.Coluna - 1);
+            //Sudoeste
+            pos.DefinirPosicao(Posicao.Linha + 1, Posicao.Coluna - 1);
             while (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
@@ -72,7 +73,7 @@ namespace xadrez
                     break;
                 }
 
-                pos.Coluna--;
+                pos.DefinirPosicao(pos.Linha + 1, pos.Coluna - 1);
             }
 
             return matriz;
@@ -80,7 +81,7 @@ namespace xadrez
 
         public override string ToString()
         {
-            return "T";
+            return "B";
         }
     }
 }

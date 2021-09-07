@@ -27,7 +27,7 @@
 
         public bool ExisteMovimentosPossiveis()
         {
-            bool[,] matriz = MovimentosPosiveis();
+            bool[,] matriz = MovimentosPossiveis();
 
             for (int i = 0; i < Tab.Linhas; i++)
             {
@@ -45,9 +45,9 @@
 
         public bool MovimentoPossivel(Posicao pos)
         {
-            return MovimentosPosiveis()[pos.Linha, pos.Coluna];
+            return MovimentosPossiveis()[pos.Linha, pos.Coluna];
         }
 
-        public abstract bool[,] MovimentosPosiveis();
+        public abstract bool[,] MovimentosPossiveis();
     }
 }
