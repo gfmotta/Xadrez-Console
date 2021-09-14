@@ -8,11 +8,13 @@ namespace xadrez
         {
         }
 
-        private bool PodeMover(Posicao pos) //Verifica se a peça pode se mover para tal posição
+        //Verifica se a peça pode se mover para a posiçao passada como parametro (retorna true se a posiçao estiver livre ou se tiver uma peça adversaria)
+        private bool PodeMover(Posicao pos) 
         {
             return Tab.Peca(pos) == null || Tab.Peca(pos).Cor != Cor;
         }
 
+        //Gera a matriz de movimentos possiveis da dama (dama se movimenta nas diagonais e para todos os lados)
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] matriz = new bool[Tab.Linhas, Tab.Colunas];

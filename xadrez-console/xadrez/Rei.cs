@@ -11,17 +11,20 @@ namespace xadrez
             Partida = partida;
         }
 
-        private bool PodeMover(Posicao pos) //Verifica se a peça pode se mover para tal posição
+        //Verifica se a peça pode se mover para a posiçao passada como parametro (retorna true se a posiçao estiver livre ou se tiver uma peça adversaria)
+        private bool PodeMover(Posicao pos)
         {
             return Tab.Peca(pos) == null || Tab.Peca(pos).Cor != Cor;
         }
 
+        //Verifica se a torre pode executar o movimento roque com o rei
         private bool TesteTorreParaRoque(Posicao pos)
         {
             Peca p = Tab.Peca(pos);
             return p != null && p is Torre && p.Cor == Cor && p.QtdMovimentos == 0;
         }
 
+        //Gera a matriz de movimentos possiveis do rei (rei pode se mover para todos os lados apenas uma casa)
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] matriz = new bool[Tab.Linhas, Tab.Colunas];

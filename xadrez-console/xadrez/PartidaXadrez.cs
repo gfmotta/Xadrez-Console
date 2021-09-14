@@ -28,13 +28,15 @@ namespace xadrez
             VulneravelEnPassant = null;
         }
 
-        public void ColocarNovaPeca(char coluna, int linha, Peca peca)
+        //Coloca uma nova peça no jogo
+        private void ColocarNovaPeca(char coluna, int linha, Peca peca)
         {
             Tab.ColocarPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
             Pecas.Add(peca);
         }
 
-        public void PosicionarPecas()
+        //Posiciona as peças no inicio da partida de xadrez
+        private void PosicionarPecas()
         {
             ColocarNovaPeca('a', 1, new Torre(Tab, Cor.Branca));
             ColocarNovaPeca('b', 1, new Cavalo(Tab, Cor.Branca));
@@ -71,7 +73,8 @@ namespace xadrez
             ColocarNovaPeca('h', 7, new Peao(Tab, Cor.Preta, this));
         }
 
-        public Peca ExecutarMovimento(Posicao origem, Posicao destino)
+        //Retira e coloca uma peça em uma nova posição (utilizado para realizar jogadas)
+        private Peca ExecutarMovimento(Posicao origem, Posicao destino)
         {
             Peca p = Tab.RetirarPeca(origem);
             Peca pecaCapturada = Tab.RetirarPeca(destino);
@@ -126,7 +129,8 @@ namespace xadrez
             return pecaCapturada;
         }
 
-        public void DesfazerMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
+        //Desfaz o movimento se for irregular
+        private void DesfazerMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
         {
             Peca p = Tab.RetirarPeca(destino);
 
@@ -180,6 +184,7 @@ namespace xadrez
             }
         }
 
+        //Realiza uma jogada valida
         public void RealizarJogada(Posicao origem, Posicao destino)
         {
             Peca pecaCapturada = ExecutarMovimento(origem, destino);
@@ -188,6 +193,21 @@ namespace xadrez
             {
                 DesfazerMovimento(origem, destino, pecaCapturada);
                 throw new TabuleiroException("Voçe não pode se colocar em xeque! Por favor, faça outra jogada.");
+            }
+
+            //Jogada especial: Promoçao
+            Peca p = Tab.Peca(destino);
+
+            if (p is Peao)
+            {
+                if ((p.Cor == Cor.Branca && destino.Linha ==0) || (p.Cor == Cor.Preta && destino.Linha == 7))
+                {
+                    p = Tab.RetirarPeca(destino);
+                    Pecas.Remove(p);
+                    Peca dama = new Dama(Tab, p.Cor);
+                    Tab.ColocarPeca(dama, destino);
+                    Pecas.Add(dama);
+                }
             }
 
             if (EstaEmXeque(Adversario(JogadorAtual)))
@@ -210,8 +230,6 @@ namespace xadrez
             }
 
             //Jogada especial: En Passant
-            Peca p = Tab.Peca(destino);
-
             if (p is Peao && (destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2))
             {
                 VulneravelEnPassant = p;
@@ -223,7 +241,8 @@ namespace xadrez
 
         }
 
-        public HashSet<Peca> PecasCapturadas(Cor cor) //Metodo que retorna as peças capturadas da mesma cor passada como parametro.
+        //Retorna as peças capturadas da mesma cor passada como parametro.
+        public HashSet<Peca> PecasCapturadas(Cor cor)
         {
             HashSet<Peca> aux = new();
 
@@ -238,7 +257,8 @@ namespace xadrez
             return aux;
         }
 
-        public HashSet<Peca> PecasEmJogo(Cor cor) //Metodo que retora as peças da mesma cor passada como parametro que ainda estão em jogo.
+        //Retora as peças da mesma cor passada como parametro que ainda estão em jogo.
+        public HashSet<Peca> PecasEmJogo(Cor cor)
         {
             HashSet<Peca> aux = new();
 
@@ -254,6 +274,7 @@ namespace xadrez
             return aux;
         }
 
+        //Metodo auxiliar para identificar a cor adversaria
         private Cor Adversario(Cor cor)
         {
             if (cor == Cor.Branca)
@@ -266,6 +287,7 @@ namespace xadrez
             }
         }
 
+        //Verifica se o Rei ainda esta em jogo
         private Peca Rei(Cor cor)
         {
             foreach (Peca x in PecasEmJogo(cor))
@@ -278,7 +300,8 @@ namespace xadrez
             return null;
         }
 
-        public bool EstaEmXeque(Cor cor)
+        //Verifica se o Rei da cor passada como parametro esta em xeque
+        private bool EstaEmXeque(Cor cor)
         {
             Peca r = Rei(cor);
 
@@ -300,7 +323,8 @@ namespace xadrez
             return false;
         }
 
-        public bool TesteXequeMate(Cor cor)
+        //Verifica se o Rei da cor passada como parametro esta em xeque mate
+        private bool TesteXequeMate(Cor cor)
         {
             if (!EstaEmXeque(cor))
             {
@@ -335,6 +359,7 @@ namespace xadrez
             return true;
         }
 
+        //Verifica se a posiçao de origem que o usuario digitou é valida
         public void ValidarPosicaoDeOrigem(Posicao origem)
         {
             Tab.ValidarPosicao(origem);
@@ -353,6 +378,7 @@ namespace xadrez
             }
         }
 
+        //Verifica se a posiçao de destino que o usuario digitou é valida
         public void ValidarPosicaoDeDestino(Posicao origem, Posicao destino)
         {
             Tab.ValidarPosicao(destino);
@@ -363,7 +389,7 @@ namespace xadrez
             }
         }
 
-        public void MudaJogador()
+        private void MudaJogador()
         {
             if (JogadorAtual == Cor.Branca)
             {

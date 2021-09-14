@@ -7,6 +7,7 @@ namespace xadrez_console
 {
     class Tela
     {
+        //Imprime as informaçoes da partida na tela
         public static void ImprimirPartida(PartidaXadrez partida)
         {
             ImprimirTabuleiro(partida.Tab);
@@ -32,7 +33,8 @@ namespace xadrez_console
             }
         }
 
-        public static void ImprimirPecasCapturadas(PartidaXadrez partida)
+        //Imprime o controle de peças capturadas
+        private static void ImprimirPecasCapturadas(PartidaXadrez partida)
         {
             Console.WriteLine(Environment.NewLine + "Peças capturadas: ");
             Console.Write("Brancas: ");
@@ -43,7 +45,8 @@ namespace xadrez_console
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        //Imprime o conjunto de peças capturadas
+        private static void ImprimirConjunto(HashSet<Peca> conjunto)
         {
             Console.Write("(");
             foreach (Peca p in conjunto)
@@ -53,7 +56,8 @@ namespace xadrez_console
             Console.WriteLine(")");
         }
 
-        public static void ImprimirTabuleiro(Tabuleiro tab) //imprime um tabuleiro na tela
+        //Imprime o tabuleiro na tela
+        private static void ImprimirTabuleiro(Tabuleiro tab)
         {
             for (int i = 0; i < tab.Linhas; i++)
             {
@@ -70,7 +74,8 @@ namespace xadrez_console
             Console.WriteLine("  a b c d e f g h");
         }
 
-        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] movimentosPossiveis) //imprime um tabuleiro na tela com os possiveis movimentos de uma peça selecionada pelo jogador
+        //Imprime o tabuleiro na tela com os possiveis movimentos de uma peça selecionada pelo jogador
+        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] movimentosPossiveis) 
         {
             for (int i = 0; i < tab.Linhas; i++)
             {
@@ -93,6 +98,7 @@ namespace xadrez_console
             Console.WriteLine("  a b c d e f g h");
         }
 
+        //Le e converte a posiçao digitada pelo usuario
         public static PosicaoXadrez LerPosicaoXadrez()
         {
             string p = Console.ReadLine().Replace(" ", "").ToLower();
@@ -101,7 +107,8 @@ namespace xadrez_console
             return new PosicaoXadrez(coluna, linha);
         }
 
-        public static void ColocarPeca(Peca peca)
+        //Imprime as peças com cores diferentes
+        private static void ColocarPeca(Peca peca)
         {
             if (peca == null)
             {

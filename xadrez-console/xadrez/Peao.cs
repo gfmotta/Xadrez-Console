@@ -11,16 +11,19 @@ namespace xadrez
             Partida = partida;
         }
 
-        private bool ExisteInimigo(Posicao pos) //Verifica se existe uma peça adversaria na posição passada como parametro
+        //Verifica se existe uma peça adversaria na posição passada como parametro
+        private bool ExisteInimigo(Posicao pos)
         {
             return Tab.Peca(pos) != null && Tab.Peca(pos).Cor != Cor;
         }
 
-        private bool Livre(Posicao pos) //Verifica se a posição esta livre
+        //Verifica se a posição passada como parametro esta livre
+        private bool Livre(Posicao pos)
         {
             return Tab.Peca(pos) == null;
         }
 
+        //Gera a matriz de movimentos possiveis do peao (peao pode se mover duas casas para frente apenas em seu primeiro movimento e uma casa para frente no restante da partida)
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] matriz = new bool[Tab.Linhas, Tab.Colunas];
@@ -29,7 +32,7 @@ namespace xadrez
 
             if (Cor == Cor.Branca)
             {
-                //Em seu primeiro movimento, o Peao pode andar duas casas, após o primeiro movimento apenas de uma em uma
+                //Em seu primeiro movimento, o Peao pode andar duas casas
                 pos.DefinirPosicao(Posicao.Linha - 2, Posicao.Coluna);
                 Posicao pos2 = new(Posicao.Linha - 1, Posicao.Coluna);
                 if (Tab.PosicaoValida(pos2) && Livre(pos2) && Tab.PosicaoValida(pos) && Livre(pos) && QtdMovimentos == 0)
@@ -73,7 +76,7 @@ namespace xadrez
             }
             else
             {
-                //Em seu primeiro movimento, o Peao pode andar duas casas, após o primeiro movimento apenas de uma em uma
+                //Em seu primeiro movimento, o Peao pode andar duas casas
                 pos.DefinirPosicao(Posicao.Linha + 2, Posicao.Coluna);
                 Posicao pos2 = new(Posicao.Linha + 1, Posicao.Coluna);
                 if (Tab.PosicaoValida(pos2) && Livre(pos2) && Tab.PosicaoValida(pos) && Livre(pos) && QtdMovimentos == 0)

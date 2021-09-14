@@ -8,12 +8,13 @@ namespace xadrez
         {
         }
 
+        //Verifica se a peça pode se mover para a posiçao passada como parametro (retorna true se a posiçao estiver livre ou se tiver uma peça adversaria)
         private bool PodeMover(Posicao pos)
         {
-            Peca p = Tab.Peca(pos);
-            return p == null || p.Cor != Cor;
+            return Tab.Peca(pos) == null || Tab.Peca(pos).Cor != Cor;
         }
 
+        //Gera a matriz de movimentos possiveis do bispo (bispo se movimenta nas diagonais)
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] matriz = new bool[Tab.Linhas, Tab.Colunas];
